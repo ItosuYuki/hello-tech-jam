@@ -1,8 +1,9 @@
-export default function Page() {
-  const greeting = 'Hello';
+export default function HelloNextjs() {
+  const message: string = "Hello, Next.js!";
+ 
   return (
     <div>
-      <h1>{greeting}, Next.js</h1>
+      <h1>{message}</h1>
     </div>
-  )
+  );
 }

@@ -13,6 +13,12 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
   ]),
+  {
+    rules: {
+      // シングルクォートを使うとエラーにする
+      quotes: ["error", "double"],
+    },
+  },
 ]);
-
+ 
 export default eslintConfig;
