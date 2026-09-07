@@ -1,0 +1,22 @@
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: deps  # 開発環境では、開発用依存関係（devDependencies）を含み、ビルド不要でホットリロードが可能なdepsステージを使用します。builderやrunnerステージは本番用やビルド済みイメージ向けです。
+    working_dir: /app
+    command: pnpm dev  # DockerfileのCMDと重複しますが、明示的に指定（Windows PowerShell対応）
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules  # 名前付きボリューム。docker compose downしても依存関係が消えない
+      - /app/.next  # .nextは匿名ボリュームで除外（ビルドキャッシュの競合を防ぐ）
+    environment:
+      - NODE_ENV=development
+      - WATCHPACK_POLLING=true  # Windowsでのファイル監視対応
+    stdin_open: true
+    tty: true
+ 
+volumes:
+  node_modules:
